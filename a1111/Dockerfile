@@ -34,7 +34,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118 && \
   pip install -r requirements_versions.txt && \
   pip install -r repositories/CodeFormer/requirements.txt && \
-  pip install --force-reinstall --no-deps --pre xformers && \
+  pip install --pre xformers && \
   pip install triton pyngrok scikit-learn send2trash mediapipe ultralytics opencv-python-headless dynamicprompts[attentiongrabber,magicprompt] \
   git+https://github.com/TencentARC/GFPGAN.git \
   git+https://github.com/openai/CLIP.git \
