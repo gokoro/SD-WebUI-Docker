@@ -9,9 +9,9 @@ WORKDIR ${ROOT}
 
 # Install Essential Packages (APT)
 RUN apt-get update \
- && apt-get install -y python3 python3-pip fonts-dejavu-core rsync git jq moreutils wget \
-                       libgoogle-perftools-dev libgl1-mesa-glx libglib2.0-0 libsm6 libxrender1 libxext6 \
- && apt-get clean
+  && apt-get install -y python3 python3-pip fonts-dejavu-core rsync git jq moreutils wget \
+  libgoogle-perftools-dev libgl1-mesa-glx libglib2.0-0 libsm6 libxrender1 libxext6 \
+  && apt-get clean
 
 # Get SD
 RUN git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git .
@@ -33,7 +33,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118 && \
   pip install -r requirements_versions.txt && \
   pip install -r repositories/CodeFormer/requirements.txt && \
-  pip install --pre xformers && \
+  # pip install --pre xformers && \
   pip install triton pyngrok scikit-learn send2trash mediapipe ultralytics opencv-python-headless dynamicprompts[attentiongrabber,magicprompt] \
   git+https://github.com/TencentARC/GFPGAN.git \
   git+https://github.com/openai/CLIP.git \
@@ -54,6 +54,6 @@ RUN cp webui.py core.py
 RUN rm webui-macos-env.sh webui-user.bat webui-user.sh webui.bat webui.sh webui.py screenshot.png CODEOWNERS README.md environment-wsl2.yaml
 
 CMD test -z "${APT_ARGS}" || apt-get -y install ${APT_ARGS} \
-    && test -z "${PIP_ARGS}" || pip install ${PIP_ARGS} \
-    && find /data/config/auto/extensions -type f -name 'requirements.txt' -exec pip install -q -r '{}' \; \
-    && python3 -u core.py ${CLI_ARGS}
+  && test -z "${PIP_ARGS}" || pip install ${PIP_ARGS} \
+  && find /data/config/auto/extensions -type f -name 'requirements.txt' -exec pip install -q -r '{}' \; \
+  && python3 -u core.py ${CLI_ARGS}
