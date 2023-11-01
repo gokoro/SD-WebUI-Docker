@@ -22,7 +22,7 @@ RUN git clone https://github.com/CompVis/taming-transformers.git repositories/ta
 RUN git clone https://github.com/Stability-AI/stablediffusion.git repositories/stable-diffusion-stability-ai
 RUN git clone https://github.com/sczhou/CodeFormer.git repositories/CodeFormer
 RUN git clone https://github.com/salesforce/BLIP.git repositories/BLIP
-RUN git clone https://github.com/crowsonkb/k-diffusion.git repositories/k-diffusion
+# RUN git clone https://github.com/crowsonkb/k-diffusion.git repositories/k-diffusion
 RUN git clone https://github.com/pharmapsychotic/clip-interrogator repositories/clip-interrogator
 RUN git clone https://github.com/Stability-AI/generative-models.git repositories/generative-models
 
