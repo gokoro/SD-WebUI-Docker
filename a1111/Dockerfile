@@ -22,7 +22,7 @@ RUN git clone https://github.com/CompVis/taming-transformers.git repositories/ta
 RUN git clone https://github.com/Stability-AI/stablediffusion.git repositories/stable-diffusion-stability-ai
 RUN git clone https://github.com/sczhou/CodeFormer.git repositories/CodeFormer
 RUN git clone https://github.com/salesforce/BLIP.git repositories/BLIP
-# RUN git clone https://github.com/crowsonkb/k-diffusion.git repositories/k-diffusion
+RUN git clone https://github.com/crowsonkb/k-diffusion.git repositories/k-diffusion
 RUN git clone https://github.com/pharmapsychotic/clip-interrogator repositories/clip-interrogator
 RUN git clone https://github.com/Stability-AI/generative-models.git repositories/generative-models
 
@@ -35,7 +35,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
   pip install -r requirements_versions.txt && \
   pip install -r repositories/CodeFormer/requirements.txt && \
   pip install --pre xformers && \
-  pip install triton pyngrok scikit-learn send2trash mediapipe ultralytics opencv-python-headless dynamicprompts[attentiongrabber,magicprompt] \
+  pip install triton pyngrok scikit-learn send2trash mediapipe ultralytics opencv-python-headless dynamicprompts[attentiongrabber,magicprompt] dctorch \
   git+https://github.com/TencentARC/GFPGAN.git \
   git+https://github.com/openai/CLIP.git \
   git+https://github.com/mlfoundations/open_clip.git
