@@ -1,8 +1,8 @@
-FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04
+FROM nvidia/cuda:12.1.0-cudnn8-devel-ubuntu22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PIP_PREFER_BINARY=1
-ENV ROOT=/apt
+ENV ROOT=/app
 
 RUN mkdir ${ROOT}
 WORKDIR ${ROOT}
@@ -20,22 +20,22 @@ RUN git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git .
 RUN mkdir repositories
 RUN git clone https://github.com/CompVis/taming-transformers.git repositories/taming-transformers
 RUN git clone https://github.com/Stability-AI/stablediffusion.git repositories/stable-diffusion-stability-ai
+RUN git clone https://github.com/Stability-AI/generative-models.git repositories/generative-models
 RUN git clone https://github.com/sczhou/CodeFormer.git repositories/CodeFormer
 RUN git clone https://github.com/salesforce/BLIP.git repositories/BLIP
 RUN git clone https://github.com/crowsonkb/k-diffusion.git repositories/k-diffusion
 RUN git clone https://github.com/pharmapsychotic/clip-interrogator repositories/clip-interrogator
-RUN git clone https://github.com/Stability-AI/generative-models.git repositories/generative-models
 
 # https://github.com/pharmapsychotic/clip-interrogator/commit/7a2ac9aa57766748d7dfec8c7cddff8a4b8b143e
 RUN mkdir interrogate && cp repositories/clip-interrogator/clip_interrogator/data/* interrogate
 
 # Install Essential Packages (PIP)
 RUN --mount=type=cache,target=/root/.cache/pip \
-  pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118 && \
+  pip install torch torchvision && \
   pip install -r requirements_versions.txt && \
   pip install -r repositories/CodeFormer/requirements.txt && \
   pip install --pre xformers && \
-  pip install triton pyngrok scikit-learn send2trash mediapipe ultralytics opencv-python-headless dynamicprompts[attentiongrabber,magicprompt] dctorch \
+  pip install triton pyngrok dctorch scikit-learn send2trash mediapipe ultralytics opencv-python-headless dynamicprompts[attentiongrabber,magicprompt] \
   git+https://github.com/TencentARC/GFPGAN.git \
   git+https://github.com/openai/CLIP.git \
   git+https://github.com/mlfoundations/open_clip.git
